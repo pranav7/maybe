@@ -21,4 +21,7 @@ RUN gem install foreman
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 && apt-get install -y nodejs
 
+# Install Yarn
+RUN npm install -g yarn
+
 WORKDIR /workspace
