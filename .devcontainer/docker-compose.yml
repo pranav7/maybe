@@ -11,9 +11,9 @@ services:
       - bundle_cache:/bundle
 
     ports:
-      - "3000:3000"
+      - "3007:3000"
 
-    command: sleep infinity
+    command: bash -c "bundle install && yarn install && rm -f tmp/pids/server.pid && bundle exec rails server -b '0.0.0.0'"
 
     environment:
       DB_HOST: db
@@ -21,6 +21,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       BUNDLE_PATH: /bundle
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:postgres@db:5432
 
     depends_on:
       - db
@@ -40,7 +42,7 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
 volumes:
   postgres-data:
