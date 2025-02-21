@@ -12,11 +12,17 @@ class Investment < ApplicationRecord
     [ "Other", "other" ]
   ].freeze
 
-  def color
-    "#1570EF"
-  end
+  class << self
+    def color
+      "#1570EF"
+    end
 
-  def icon
-    "line-chart"
+    def classification
+      "asset"
+    end
+
+    def icon
+      "line-chart"
+    end
   end
 end
