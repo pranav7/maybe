@@ -6,10 +6,12 @@ export default class extends Controller {
   static targets = ["panel", "content"];
 
   toggle() {
-    this.panelTarget.classList.toggle("w-0");
-    this.panelTarget.classList.toggle("opacity-0");
+    this.panelTarget.classList.toggle("hidden");
     this.panelTarget.classList.toggle("w-80");
+    this.panelTarget.classList.toggle("py-4");
+    this.panelTarget.classList.toggle("pr-2");
     this.panelTarget.classList.toggle("opacity-100");
+    this.panelTarget.classList.toggle("overflow-y-auto");
     this.contentTarget.classList.toggle("max-w-4xl");
     this.contentTarget.classList.toggle("max-w-5xl");
 
@@ -21,7 +23,7 @@ export default class extends Controller {
         Accept: "application/json",
       },
       body: new URLSearchParams({
-        "user[show_sidebar]": !this.panelTarget.classList.contains("w-0"),
+        "user[show_sidebar]": !this.panelTarget.classList.contains("hidden"),
       }).toString(),
     });
   }
