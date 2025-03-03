@@ -21,7 +21,7 @@
         <%= currency.symbol %>
       </span>
 
-      <%= form.number_field amount_method,
+      <%= form.text_field amount_method,
         class: "form-field__input",
         inline: true,
         placeholder: "100",
@@ -31,12 +31,11 @@
           val = form.object.public_send(amount_method)
           sprintf("%.#{currency.default_precision}f", val) if val.present?
         end,
-        min: options[:min] || -99999999999999,
-        max: options[:max] || 99999999999999,
-        step: currency.step,
+        inputmode: "decimal",
         data: {
           "money-field-target": "amount",
-          "auto-submit-form-target": ("auto" if options[:auto_submit])
+          "auto-submit-form-target": ("auto" if options[:auto_submit]),
+          action: "blur->money-field#handleCalculation"
         }.compact,
         required: options[:required] %>
     </div>
@@ -58,4 +57,8 @@
       </div>
     <% end %>
   </div>
+
+  <% unless options[:hide_calculation_hint] %>
+    <p class="text-xs text-secondary mt-1">Tip: You can enter calculations like "500 + 450" or "1000 - 50"</p>
+  <% end %>
 </div>
